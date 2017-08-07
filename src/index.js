@@ -18,7 +18,12 @@ module.exports = function(config) {
 
     var db = config.db || mongoose.createConnection(config.mongoUri);
     var storage = {};
-    var zones = (typeof config.tables !== 'undefined' && Array.isArray(config.tables))?config.tables:['teams', 'channels', 'users'];
+
+    var zones = ['teams', 'channels', 'users'];
+
+    config.tables && config.tables.forEach(function(table) {
+        if (typeof table === 'string') zones.push(table);
+    });
 
     zones.forEach(function(zone) {
         var model = createModel(db, zone);
@@ -36,15 +41,16 @@ function createModel(db, zone) {
     return db.model(zone, schema);
 }
 
-function getStorage(model) {
+function getStorage(table) {
+
     return {
         get: function(id, cb) {
-            model.findOne({
+            return table.findOne({
                 id: id
             }).lean().exec(cb);
         },
         save: function(data, cb) {
-            model.findOneAndUpdate({
+            return table.findOneAndUpdate({
                 id: data.id
             }, data, {
                 upsert: true,
@@ -52,7 +58,10 @@ function getStorage(model) {
             }).lean().exec(cb);
         },
         all: function(cb) {
-            model.find({}).lean().exec(cb);
+            return table.find({}).lean().exec(cb);
+        },
+        find: function(data, cb) {
+            return table.find(data).lean().exec(cb);
         }
     };
 }
