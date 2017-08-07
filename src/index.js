@@ -8,7 +8,11 @@ var mongoose = require('mongoose');
  */
 module.exports = function(config) {
 
-    if (!config || !config.mongoUri || !config.db) {
+    if (!config) {
+        throw new Error('Need to provide mongo address or a mongoose instance');
+    }
+
+    if (!config.mongoUri || !config.db) {
         throw new Error('Need to provide mongo address or a mongoose instance');
     }
 
