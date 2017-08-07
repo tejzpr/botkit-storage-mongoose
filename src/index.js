@@ -8,13 +8,13 @@ var mongoose = require('mongoose');
  */
 module.exports = function(config) {
 
-    if (!config || !config.mongoUri) {
-        throw new Error('Need to provide mongo address.');
+    if (!config || !config.mongoUri || !config.db) {
+        throw new Error('Need to provide mongo address or a mongoose instance');
     }
 
-    var db = mongoose.createConnection(config.mongoUri);
+    var db = config.db || mongoose.createConnection(config.mongoUri);
     var storage = {};
-    var zones = ['teams', 'channels', 'users'];
+    var zones = (typeof config.tables !== 'undefined' && Array.isArray(config.tables))?config.tables:['teams', 'channels', 'users'];
 
     zones.forEach(function(zone) {
         var model = createModel(db, zone);
