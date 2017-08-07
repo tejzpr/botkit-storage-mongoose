@@ -1,6 +1,6 @@
 # botkit-storage-mongoose
 
-A MongoDB/Mongoose storage module for Botkit.
+A MongoDB/Mongoose storage module for Botkit. Added the option to use an existing mongoDB connection and the ability to use new Models.
 
 ## Usage
 
@@ -11,9 +11,9 @@ Make sure everything you store has an `id` property, that's what you'll use to l
 
 ```
 var Botkit = require('botkit'),
-    mongodbStorage = require('botkit-storage-mongoose')({mongoUri: '...'}),
+    mongodbStorage = require('botkit-storage-mongoose')({mongoUri: '...', tables: ['TABLE1', 'TABLE2']}),
     controller = Botkit.slackbot({
-        storage: mongodbStorage
+        storage: mongodbStorage // or db: MongoDB-instance
     });
 ```
 
