@@ -12,7 +12,7 @@ module.exports = function(config) {
         throw new Error('Need to provide mongo address or a mongoose instance');
     }
 
-    if (!config.mongoUri || !config.db) {
+    if (!config.mongoUri && !config.db) {
         throw new Error('Need to provide mongo address or a mongoose instance');
     }
 
