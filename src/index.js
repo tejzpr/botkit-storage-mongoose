@@ -60,8 +60,8 @@ function getStorage(table) {
         all: function(cb) {
             return table.find({}).lean().exec(cb);
         },
-        find: function(data, cb) {
-            return table.find(data).lean().exec(cb);
+        find: function(data, cb, options) {
+            return table.find(data ,null, options).lean().exec(cb);
         }
     };
 }
