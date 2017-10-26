@@ -1,6 +1,6 @@
 {
   "name": "botkit-storage-mongoose",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A MongoDB/Mongoose storage driver for Botkit",
   "main": "src/index.js",
   "scripts": {
