@@ -44,6 +44,8 @@ function createModel(db, zone) {
     } catch (e) {
         if(e.name === 'OverwriteModelError'){
             return db.model(zone);
+        } else {
+            throw(e);
         }
     }
 }
@@ -66,6 +68,9 @@ function getStorage(table) {
         },
         all: function(cb) {
             return table.find({}).lean().exec(cb);
+        },
+        delete: function(id, cb) {
+            return table.remove({id:id}).lean().exec(cb);
         },
         find: function(data, cb, options) {
             return table.find(data ,null, options).lean().exec(cb);

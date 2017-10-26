@@ -1,6 +1,6 @@
 # botkit-storage-mongoose
 
-A MongoDB/Mongoose storage module for Botkit. Added the option to use an existing mongoDB connection and the ability to use new Models.
+A MongoDB/Mongoose storage module for Botkit. 
 
 ## Usage
 
