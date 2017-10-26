@@ -44,6 +44,8 @@ function createModel(db, zone) {
     } catch (e) {
         if(e.name === 'OverwriteModelError'){
             return db.model(zone);
+        } else {
+            throw(e);
         }
     }
 }
