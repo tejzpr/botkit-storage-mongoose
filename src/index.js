@@ -38,7 +38,14 @@ function createModel(db, zone) {
         strict: false,
         collection: zone
     });
-    return db.model(zone, schema);
+    
+    try {
+        return db.model(zone, schema);
+    } catch (e) {
+        if(e.name === 'OverwriteModelError'){
+            return db.model(zone);
+        }
+    }
 }
 
 function getStorage(table) {
